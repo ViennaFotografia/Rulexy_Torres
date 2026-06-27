@@ -704,7 +704,7 @@
                 <p class="texto">Si quieres dejarme un lindo mensaje por mis XV, puedes hacerlo aquí:</p>
                 <textarea id="mensajeInput" placeholder="Escribe tu mensaje aquí..."></textarea>
                 <!-- REEMPLAZA ESTOS NÚMEROS (LADA y NÚMERO) POR TU NÚMERO DE WHATSAPP -->
-                <button class="button" onclick="enviarMensajeWApp('52', '1234567890')">Enviar por WhatsApp</button>
+                <button class="button" onclick="enviarMensajeWApp('1', '6198878388')">Enviar por WhatsApp</button>
             </section>
 
             <!-- Flores decorativas laterales -->
@@ -799,6 +799,26 @@
             if(!mensaje) return alert("Por favor escribe un mensaje primero.");
             var url = "https://api.whatsapp.com/send?phone=" + lada + numero + "&text=" + encodeURIComponent(mensaje);
             window.open(url, '_blank');
+        }
+
+        const numeroConfirmacion = "6198878388"; 
+
+        function confirmarAsistencia(event) {
+            event.preventDefault();
+            var nombre = document.getElementById("familia").value;
+            var asistire = document.getElementById("asistire").checked;
+
+            var mensajeCA = asistire 
+                ? `Hola, soy ${nombre} y confirmo mi asistencia a los XV años de Ruxely.` 
+                : `Hola, soy ${nombre} y lamentablemente, no podré asistir a los XV años de Ruxely.`;
+
+            //var confirmacion = confirm(asistire ? "¿Estás seguro de confirmar tu asistencia?" : "¿Estás seguro de que no podrás asistir?");
+
+            //if (confirmacion) {
+                var urlCA = "https://api.whatsapp.com/send?phone=1" + numeroConfirmacion + "&text=" + encodeURIComponent(mensajeCA);
+                window.open(urlCA, '_blank').focus();
+            //}
+            return false;
         }
 
         // 4. Lógica de Reproductor de Audio
