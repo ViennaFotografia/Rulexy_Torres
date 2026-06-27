@@ -319,31 +319,31 @@
         /* --- Estilos para la Cubierta de la Invitación --- */
         .cover-panel {
             position: fixed;
-            left: 0;
-            width: 100%;
-            height: 50vh; 
+            top: 0;
+            width: 50vw; /* 50% del ancho de la ventana */
+            height: 100vh; /* 100% de la altura de la ventana */
             background-color: #D1C1AB;
             z-index: 9998;
             box-sizing: border-box; /* Para que el borde no afecte el tamaño total */
             transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1); /* Ajustado a 1.8s para sincronizar */
         }
 
-        #cover-top {
-            top: 0;
-            border-bottom: 2px solid var(--color-rojo-pastel);
+        #cover-left {
+            left: 0;
+            border-right: 2px solid var(--color-rojo-pastel);
         }
 
-        #cover-bottom {
-            bottom: 0;
-            border-top: 2px solid var(--color-rojo-pastel);
+        #cover-right {
+            right: 0;
+            border-left: 2px solid var(--color-rojo-pastel);
         }
 
         /* Clases para animar la apertura */
-        #cover-top.opened {
-            transform: translateY(-100%);
+        #cover-left.opened {
+            transform: translateX(-100%);
         }
-        #cover-bottom.opened {
-            transform: translateY(100%);
+        #cover-right.opened {
+            transform: translateX(100%);
         }
 
         #play-button-container {
@@ -419,8 +419,8 @@
 <body>
 
     <!-- MARK: CUBIERTA INICIAL -->
-    <div id="cover-top" class="cover-panel"></div>
-    <div id="cover-bottom" class="cover-panel"></div>
+    <div id="cover-left" class="cover-panel"></div>
+    <div id="cover-right" class="cover-panel"></div>
     <div id="play-button-container">
         <div class="play-button" id="cover-play-button">
             <div class="play-icon"></div>
@@ -699,8 +699,8 @@
         }
         
         // Iniciar audio con la primera interacción del usuario
-        const coverTop = document.getElementById('cover-top');
-        const coverBottom = document.getElementById('cover-bottom');
+        const coverLeft = document.getElementById('cover-left');
+        const coverRight = document.getElementById('cover-right');
         const coverPlayButton = document.getElementById('cover-play-button');
         const playButtonContainer = document.getElementById('play-button-container');
 
@@ -715,8 +715,8 @@
             playButtonContainer.style.opacity = '0';
 
             // 2. Iniciar la animación de apertura de las cubiertas INMEDIATAMENTE
-            coverTop.classList.add('opened');
-            coverBottom.classList.add('opened');
+            coverLeft.classList.add('opened');
+            coverRight.classList.add('opened');
 
             // 3. Iniciar la música
             if (reproductor.paused) {
@@ -726,8 +726,8 @@
             // 4. Limpiar todo y activar animaciones después de la apertura
             setTimeout(() => {
                 document.body.style.overflow = 'auto';
-                coverTop.style.display = 'none';
-                coverBottom.style.display = 'none';
+                coverLeft.style.display = 'none';
+                coverRight.style.display = 'none';
                 playButtonContainer.style.display = 'none';
 
                 // 5. Lógica de Animación al Hacer Scroll (INICIA AHORA)
