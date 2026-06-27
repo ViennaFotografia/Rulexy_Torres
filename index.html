@@ -180,10 +180,16 @@
         /* Cuadrícula de fotos */
         .grid-gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 20px;
         }
+        .grid-3-cols {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-2-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
         .grid-gallery img {
             width: 100%;
             height: 200px;
@@ -420,7 +426,7 @@
             <a href="https://maps.app.goo.gl/GHcz6Ez6325gRL7K9" target="_blank" class="lugar-link animate-on-scroll">
                 <img src="foto_local.jpg" alt="Foto del Salon Gastronomico">
                 <h4 class="nombre-lugar">Salon Gastronomico</h4>
-                <p class="direccion-lugar">Chihuahua 18, Durango, 22117 Tijuana, B.C.</p>
+                <p class="direccion-lugar">Blvd. Gustavo Diaz Ordaz 15, El Prado, 22105 Tijuana, B.C.</p>
                 <p class="hora-lugar">08:00 PM</p>
                 <div class="button" style="margin-top: 25px;">Ir al Mapa</div>
             </a>
@@ -446,11 +452,95 @@
         <!-- MARK: GALERÍA DE FOTOS -->
         <section>
             <h2 class="animate-on-scroll">Mis Momentos</h2>
-            <div class="grid-gallery animate-on-scroll">
-                <img src="https://placehold.co/300x400/f5f5f5/940f1a?text=Foto+1" alt="Galeria">
-                <img src="https://placehold.co/300x400/f5f5f5/940f1a?text=Foto+2" alt="Galeria">
-                <img src="https://placehold.co/300x400/f5f5f5/940f1a?text=Foto+3" alt="Galeria">
-                <img src="https://placehold.co/300x400/f5f5f5/940f1a?text=Foto+4" alt="Galeria">
+            <!-- Bloque 1: 3 columnas -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/1.jpeg" alt="Galeria 1">
+                <img src="fotos/2.jpeg" alt="Galeria 2">
+                <img src="fotos/9.jpeg" alt="Galeria 9">
+                <img src="fotos/5.jpeg" alt="Galeria 5">
+                <img src="fotos/6.jpeg" alt="Galeria 6">
+                <img src="fotos/7.jpeg" alt="Galeria 7">
+            </div>
+            <!-- Bloque 2: 2 columnas -->
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/8.jpeg" alt="Galeria 8">
+                <img src="fotos/3.jpeg" alt="Galeria 3">
+                <img src="fotos/10.jpeg" alt="Galeria 10">
+                <img src="fotos/11.jpeg" alt="Galeria 11">
+            </div>
+            <!-- Bloque 3: 3 columnas -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/12.jpeg" alt="Galeria 12">
+                <img src="fotos/13.jpeg" alt="Galeria 13">
+                <img src="fotos/14.jpeg" alt="Galeria 14">
+                <img src="fotos/15.jpeg" alt="Galeria 15">
+                <img src="fotos/16.jpeg" alt="Galeria 16">
+                <img src="fotos/17.jpeg" alt="Galeria 17">
+            </div>
+            <!-- Bloque 4: 2 columnas -->
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/18.jpeg" alt="Galeria 18">
+                <img src="fotos/20.jpeg" alt="Galeria 20">
+                <img src="fotos/21.jpeg" alt="Galeria 21">
+                <img src="fotos/22.jpeg" alt="Galeria 22">
+            </div>
+            <!-- Bloque 5: 3 columnas -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/23.jpeg" alt="Galeria 23">
+                <img src="fotos/24.jpeg" alt="Galeria 24">
+                <img src="fotos/25.jpeg" alt="Galeria 25">
+                <img src="fotos/26.jpeg" alt="Galeria 26">
+                <img src="fotos/28.jpeg" alt="Galeria 28">
+                <img src="fotos/29.jpeg" alt="Galeria 29">
+            </div>
+            <!-- Bloque 6: 2 columnas -->
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/30.jpeg" alt="Galeria 30">
+                <img src="fotos/31.jpeg" alt="Galeria 31">
+                <img src="fotos/32.jpeg" alt="Galeria 32">
+                <img src="fotos/33.jpeg" alt="Galeria 33">
+            </div>
+            <!-- Bloque 7: 3 columnas -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/34.jpeg" alt="Galeria 34">
+                <img src="fotos/36.jpeg" alt="Galeria 36">
+                <img src="fotos/37.jpeg" alt="Galeria 37">
+                <img src="fotos/38.jpeg" alt="Galeria 38">
+                <img src="fotos/39.jpeg" alt="Galeria 39">
+                <img src="fotos/40.jpeg" alt="Galeria 40">
+            </div>
+            <!-- Bloque 8: 2 columnas -->
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/41.jpeg" alt="Galeria 41">
+                <img src="fotos/42.jpeg" alt="Galeria 42">
+                <img src="fotos/44.jpeg" alt="Galeria 44">
+                <img src="fotos/45.jpeg" alt="Galeria 45">
+            </div>
+            <!-- Bloque 9: 3 columnas -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/46.jpeg" alt="Galeria 46">
+                <img src="fotos/47.jpeg" alt="Galeria 47">
+                <img src="fotos/48.jpeg" alt="Galeria 48">
+                <img src="fotos/49.jpeg" alt="Galeria 49">
+                <img src="fotos/50.jpeg" alt="Galeria 50">
+                <img src="fotos/52.jpeg" alt="Galeria 52">
+            </div>
+            <!-- Bloque 10: 2 columnas -->
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/53.jpeg" alt="Galeria 53">
+                <img src="fotos/54.jpeg" alt="Galeria 54">
+                <img src="fotos/55.jpeg" alt="Galeria 55">
+                <img src="fotos/56.jpeg" alt="Galeria 56">
+            </div>
+            <!-- Bloque 11: 3 columnas (final) -->
+            <div class="grid-gallery grid-3-cols animate-on-scroll">
+                <img src="fotos/57.jpeg" alt="Galeria 57">
+                <img src="fotos/58.jpeg" alt="Galeria 58">
+                <img src="fotos/59.jpeg" alt="Galeria 59">
+            </div>
+            <div class="grid-gallery grid-2-cols animate-on-scroll">
+                <img src="fotos/60.jpeg" alt="Galeria 60">
+                <img src="fotos/61.jpeg" alt="Galeria 61">
             </div>
         </section>
 
