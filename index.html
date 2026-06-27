@@ -82,7 +82,7 @@
         .side-flower-container {
             display: flex; 
             justify-content: space-between; 
-            padding: 0 20px; 
+            padding: 0 0; 
             margin-top: -20px;
         }
 
@@ -264,9 +264,59 @@
         textarea { height: 100px; resize: none; }
         
         input[type="radio"] {
-            accent-color: var(--color-secundario);
+            /* Ocultamos el radio button por defecto */
+            opacity: 0;
+            position: fixed;
+            width: 0;
         }
 
+        .confirmation-options {
+            margin: 20px 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px; /* Espacio entre opciones */
+            cursor: pointer;
+        }
+
+        .radio-label {
+            position: relative;
+            padding-left: 35px; /* Espacio para el círculo personalizado */
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Círculo exterior del radio button */
+        .radio-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--color-rojo-pastel);
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        /* Círculo interior (punto) que aparece al seleccionar */
+        input[type="radio"]:checked + .radio-label::after {
+            content: '';
+            position: absolute;
+            left: 6px; /* (22 + 2*2 - 14) / 2 */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--color-rojo-pastel);
+        }
         /* Botón de Audio Flotante */
         #fixed-items {
             position: fixed;
@@ -393,6 +443,26 @@
             transform: translateY(0);
         }
 
+        /* Animación para flores laterales */
+        .animate-slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px) scaleX(-1);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-slide-in-left.is-visible {
+            opacity: 1;
+            transform: translateX(0) scaleX(-1);
+        }
+        .animate-slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-slide-in-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Estilo para el ítem del itinerario */
         .itinerario-item {
             display: flex;
@@ -428,210 +498,259 @@
 
     <!-- Nuevo contenedor para el fondo -->
     <div class="background-container">
-    <div class="container">
-        <!-- Flores decorativas de las esquinas -->
-        <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-left">
-        <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-right">
-        <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-left">
-        <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-right">
+        <div class="container">
+            <!-- Flores decorativas de las esquinas -->
+            <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-left">
+            <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-right">
+            <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-left">
+            <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-right">
 
-        
-        <!-- MARK: INICIO / PORTADA -->
-        <section id="portada">
-            <h1 class="animate-on-scroll">¡Mis XV Años!</h1>
             
-            <!-- Contenedor para la foto y el marco -->
-            <div class="foto-container animate-on-scroll">
-                <!-- Reemplaza src con la ruta a tu foto principal -->
-                <img class="foto-principal" src="principal.jpeg" alt="Foto de Ruxely">
-                <img class="marco-gif" src="aro-brillo.gif" alt="Marco brillante">
+            <!-- MARK: INICIO / PORTADA -->
+            <section id="portada">
+                <h1 class="animate-on-scroll">¡Mis XV Años!</h1>
+                
+                <!-- Contenedor para la foto y el marco -->
+                <div class="foto-container animate-on-scroll">
+                    <!-- Reemplaza src con la ruta a tu foto principal -->
+                    <img class="foto-principal" src="principal.jpeg" alt="Foto de Ruxely">
+                    <img class="marco-gif" src="aro-brillo.gif" alt="Marco brillante">
+                </div>
+                
+                <p class="texto animate-on-scroll" style="font-style: italic; padding: 0 20px;">
+                    "Existen momentos en la vida que imaginamos, soñamos y esperamos, uno de esos momentos ha llegado"
+                </p> 
+                
+                <div class="name-band-container animate-on-scroll">
+                    <h2 class="person-name">Ruxely Torres</h2>
+                </div>
+                <h3 class="animate-on-scroll" style="margin-top: 0;">18 . JUL . 2026</h3>
+                
+                <!-- Contador -->
+                <div class="countdown-container animate-on-scroll">
+                    <div class="segment"><span class="number" id="days">0</span><span class="unit">Días</span></div>
+                    <div class="segment"><span class="number" id="hours">0</span><span class="unit">Horas</span></div>
+                    <div class="segment"><span class="number" id="minutes">0</span><span class="unit">Min</span></div>
+                    <div class="segment"><span class="number" id="seconds">0</span><span class="unit">Seg</span></div>
+                </div>
+            </section>
+
+            <!-- MARK: PADRES Y PADRINOS -->
+            <section>
+                <h2 class="animate-on-scroll">Con la bendición de mis Papás</h2>
+                <img class="separador-decorativo animate-on-scroll" src="1_separador.webp" alt="separador">
+                <p class="texto nombres-familiares animate-on-scroll">Marcos Torres<br>&<br>Claudia de la Torre</p>
+                
+                <h2 style="margin-top: 40px;" class="animate-on-scroll">Padrinos</h2>
+                <img class="separador-decorativo animate-on-scroll" src="1_separador.webp" alt="separador">
+                <p class="texto nombres-familiares animate-on-scroll">Nancy Fernandez<br>&<br>Rafael Ruiz</p>
+            </section>
+
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
+            </div>
+
+            <!-- MARK: UBICACIONES -->
+            <section>
+                <h2 class="animate-on-scroll">Lugar del Evento</h2>
+
+                <!-- Recepción -->
+                <a href="https://www.google.com/maps/place/32.49456478326591,-116.96850702640816" target="_blank" class="lugar-link animate-on-scroll">
+                    <img src="foto_local.jpg" alt="Foto del Salon Gastronomico">
+                    <h4 class="nombre-lugar">Salon Gastronomico</h4>
+                    <p class="direccion-lugar">Blvd. Gustavo Diaz Ordaz 15, El Prado, 22105 Tijuana, B.C.</p>
+                    <p class="hora-lugar">08:00 PM</p>
+                    <div class="button" style="margin-top: 25px;">Ir al Mapa</div>
+                </a>
+            </section>
+
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
+            </div>
+
+            <!-- MARK: ITINERARIO Y CÓDIGO DE VESTIMENTA -->
+            <section>
+                <h2 class="animate-on-scroll">Programa del Evento</h2>
+                <div class="itinerario-item animate-on-scroll">
+                    <div class="itinerario-icono">
+                        <img src="buffet.webp" alt="Icono de Buffet">
+                    </div>
+                    <p class="texto"><strong>Comida:</strong> 08:00 PM - 09:00 PM</p>
+                </div>
+
+                <h2 style="margin-top: 40px;" class="animate-on-scroll">Código de Vestimenta</h2>
+                <div class="itinerario-item animate-on-scroll" style="flex-direction: column;">
+                    <div class="itinerario-icono"><img src="vestimenta.webp" alt="Icono de Vestimenta"></div>
+                    <p class="texto"><strong>Formal</strong><br>El color <strong>rojo</strong> queda reservado exclusivamente para la quinceañera.</p>
+                </div>
+            </section>
+
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
             </div>
             
-            <p class="texto animate-on-scroll" style="font-style: italic; padding: 0 20px;">
-                "Existen momentos en la vida que imaginamos, soñamos y esperamos, uno de esos momentos ha llegado"
-            </p> 
-            
-            <div class="name-band-container animate-on-scroll">
-                <h2 class="person-name">Ruxely Torres</h2>
-            </div>
-            <h3 class="animate-on-scroll" style="margin-top: 0;">18 . JUL . 2026</h3>
-            
-            <!-- Contador -->
-            <div class="countdown-container animate-on-scroll">
-                <div class="segment"><span class="number" id="days">0</span><span class="unit">Días</span></div>
-                <div class="segment"><span class="number" id="hours">0</span><span class="unit">Horas</span></div>
-                <div class="segment"><span class="number" id="minutes">0</span><span class="unit">Min</span></div>
-                <div class="segment"><span class="number" id="seconds">0</span><span class="unit">Seg</span></div>
-            </div>
-        </section>
+            <!-- MARK: GALERÍA DE FOTOS -->
+            <section>
+                <h2 class="animate-on-scroll">Mis Momentos</h2>
+                <!-- Bloque 1: 3 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-3-cols">
+                        <img src="fotos/1.jpeg" alt="Galeria 1" class="animate-slide-in-left">
+                        <img src="fotos/2.jpeg" alt="Galeria 2" class="animate-slide-in-left">
+                        <img src="fotos/3.jpeg" alt="Galeria 3" class="animate-slide-in-left">
+                        <img src="fotos/5.jpeg" alt="Galeria 5" class="animate-slide-in-right">
+                        <img src="fotos/6.jpeg" alt="Galeria 6" class="animate-slide-in-right">
+                        <img src="fotos/7.jpeg" alt="Galeria 7" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 2: 2 columnas -->
+                <div class="gallery-wrapper ">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-2-cols">
+                        <img src="fotos/8.jpeg" alt="Galeria 8" class="animate-slide-in-left">
+                        <img src="fotos/9.jpeg" alt="Galeria 9" class="animate-slide-in-right">
+                        <img src="fotos/10.jpeg" alt="Galeria 10" class="animate-slide-in-left">
+                        <img src="fotos/11.jpeg" alt="Galeria 11" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 3: 3 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-3-cols">
+                        <img src="fotos/12.jpeg" alt="Galeria 12" class="animate-slide-in-left">
+                        <img src="fotos/13.jpeg" alt="Galeria 13" class="animate-slide-in-left">
+                        <img src="fotos/14.jpeg" alt="Galeria 14" class="animate-slide-in-left">
+                        <img src="fotos/15.jpeg" alt="Galeria 15" class="animate-slide-in-right">
+                        <img src="fotos/16.jpeg" alt="Galeria 16" class="animate-slide-in-right">
+                        <img src="fotos/17.jpeg" alt="Galeria 17" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 4: 2 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-2-cols">
+                        <img src="fotos/18.jpeg" alt="Galeria 18" class="animate-slide-in-left">
+                        <img src="fotos/20.jpeg" alt="Galeria 20" class="animate-slide-in-right">
+                        <img src="fotos/21.jpeg" alt="Galeria 21" class="animate-slide-in-left">
+                        <img src="fotos/22.jpeg" alt="Galeria 22" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 5: 3 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-3-cols">
+                        <img src="fotos/23.jpeg" alt="Galeria 23" class="animate-slide-in-left">
+                        <img src="fotos/24.jpeg" alt="Galeria 24" class="animate-slide-in-left">
+                        <img src="fotos/25.jpeg" alt="Galeria 25" class="animate-slide-in-left">
+                        <img src="fotos/26.jpeg" alt="Galeria 26" class="animate-slide-in-right">
+                        <img src="fotos/28.jpeg" alt="Galeria 28" class="animate-slide-in-right">
+                        <img src="fotos/29.jpeg" alt="Galeria 29" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 6: 2 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-2-cols">
+                        <img src="fotos/30.jpeg" alt="Galeria 30" class="animate-slide-in-left">
+                        <img src="fotos/31.jpeg" alt="Galeria 31" class="animate-slide-in-right">
+                        <img src="fotos/32.jpeg" alt="Galeria 32" class="animate-slide-in-left">
+                        <img src="fotos/33.jpeg" alt="Galeria 33" class="animate-slide-in-right">
+                    </div>
+                </div>
+                <!-- Bloque 7: 3 columnas -->
+                <div class="gallery-wrapper">
+                    <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                    <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                    <div class="grid-gallery grid-3-cols">
+                        <img src="fotos/34.jpeg" alt="Galeria 34" class="animate-slide-in-left">
+                        <img src="fotos/36.jpeg" alt="Galeria 36" class="animate-slide-in-left">
+                        <img src="fotos/37.jpeg" alt="Galeria 37" class="animate-slide-in-left">
+                        <img src="fotos/38.jpeg" alt="Galeria 38" class="animate-slide-in-right">
+                        <img src="fotos/39.jpeg" alt="Galeria 39" class="animate-slide-in-right">
+                        <img src="fotos/40.jpeg" alt="Galeria 40" class="animate-slide-in-right">
+                    </div>
+                </div>
+            </section>
 
-        <!-- MARK: PADRES Y PADRINOS -->
-        <section>
-            <h2 class="animate-on-scroll">Con la bendición de mis Papás</h2>
-            <img class="separador-decorativo animate-on-scroll" src="1_separador.webp" alt="separador">
-            <p class="texto nombres-familiares animate-on-scroll">Marcos Torres<br>&<br>Claudia de la Torre</p>
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
+            </div>
             
-            <h2 style="margin-top: 40px;" class="animate-on-scroll">Padrinos</h2>
-            <img class="separador-decorativo animate-on-scroll" src="1_separador.webp" alt="separador">
-            <p class="texto nombres-familiares animate-on-scroll">Nancy Fernandez<br>&<br>Rafael Ruiz</p>
-        </section>
+            <!-- MARK: LLUVIA DE SOBRES Y BUZÓN -->
+            <section class="animate-on-scroll">
+                <h2>Regalos</h2>
+                <p style="font-size: 3rem; margin: 0;">🎁</p>
+                <p class="texto">El mejor regalo es tu presencia, pero si deseas obsequiarme algo, puedes hacerlo en la</p>
+                <h3 style="font-family: var(--fuente-nombres); letter-spacing: 1px;">Lluvia de Sobres</h3>
+                <p class="texto">Es la tradición de regalar dinero en efectivo dentro de un sobre.</p>
 
-        <!-- Flores decorativas laterales -->
-        <div class="side-flower-container">
-            <img src="flor2.webp" alt="Decoración floral" class="animate-on-scroll" style="width: 70px; transform: scaleX(-1);">
-            <img src="flor2.webp" alt="Decoración floral" class="animate-on-scroll" style="width: 70px;">
+                <h2 style="margin-top: 40px;">Buzón de Deseos</h2>
+                <p class="texto">Si quieres dejarme un lindo mensaje por mis XV, puedes hacerlo aquí:</p>
+                <textarea id="mensajeInput" placeholder="Escribe tu mensaje aquí..."></textarea>
+                <!-- REEMPLAZA ESTOS NÚMEROS (LADA y NÚMERO) POR TU NÚMERO DE WHATSAPP -->
+                <button class="button" onclick="enviarMensajeWApp('52', '1234567890')">Enviar por WhatsApp</button>
+            </section>
+
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
+            </div>
+            
+            <!-- MARK: GOOGLE FOTOS -->
+            <section class="animate-on-scroll">
+                <h2>Comparte tus Momentos</h2>
+                <p style="font-size: 3rem; margin: 0;">📸</p>
+                <p class="texto">Sube tus fotos y comparte tus mejores recuerdos de este momento único. ¡Estamos emocionados de ver tus fotos!</p>
+                <img src="https://placehold.co/200x200/ffffff/333333?text=QR+para+Fotos" alt="Código QR para Google Fotos" style="border-radius: 8px; margin-top: 15px;">
+                <a href="#" target="_blank" class="button">Ver Fotos</a>
+            </section>
+
+            <!-- Flores decorativas laterales -->
+            <div class="side-flower-container">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-left" style="width: 70px;">
+                <img src="flor2.webp" alt="Decoración floral" class="animate-slide-in-right" style="width: 70px;">
+            </div>
+            
+            <!-- MARK: CONFIRMACIÓN DE ASISTENCIA -->
+            <section class="animate-on-scroll">
+                <h2>Confirmar Asistencia</h2>
+                <form onsubmit="return confirmarAsistencia(event)">
+                    <label for="familia" class="texto">Nombre y Apellido:</label><br>
+                    <input type="text" id="familia" maxlength="30" required>
+
+                    <div class="confirmation-options">
+                        <label class="texto" style="display: block; margin-bottom: 10px;">Confirmo que:</label>
+                        <div class="radio-option">
+                            <input type="radio" id="asistire" name="confirmacion" value="asistire" checked>
+                            <label for="asistire" class="radio-label">Asistiré</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="noAsistire" name="confirmacion" value="noAsistire">
+                            <label for="noAsistire" class="radio-label">No Asistiré</label>
+                        </div>
+                    </div>
+
+                    <br>
+                    <button type="submit" class="button">Confirmar por WhatsApp</button>
+                </form>
+            </section>
         </div>
-
-        <!-- MARK: UBICACIONES -->
-        <section>
-            <h2 class="animate-on-scroll">Lugar del Evento</h2>
-
-            <!-- Recepción -->
-            <a href="https://www.google.com/maps/place/32.49456478326591,-116.96850702640816" target="_blank" class="lugar-link animate-on-scroll">
-                <img src="foto_local.jpg" alt="Foto del Salon Gastronomico">
-                <h4 class="nombre-lugar">Salon Gastronomico</h4>
-                <p class="direccion-lugar">Blvd. Gustavo Diaz Ordaz 15, El Prado, 22105 Tijuana, B.C.</p>
-                <p class="hora-lugar">08:00 PM</p>
-                <div class="button" style="margin-top: 25px;">Ir al Mapa</div>
-            </a>
-        </section>
-
-        <!-- MARK: ITINERARIO Y CÓDIGO DE VESTIMENTA -->
-        <section>
-            <h2 class="animate-on-scroll">Programa del Evento</h2>
-            <div class="itinerario-item animate-on-scroll">
-                <div class="itinerario-icono">
-                    <img src="buffet.webp" alt="Icono de Buffet">
-                </div>
-                <p class="texto"><strong>Comida:</strong> 08:00 PM - 09:00 PM</p>
-            </div>
-
-            <h2 style="margin-top: 40px;" class="animate-on-scroll">Código de Vestimenta</h2>
-            <div class="itinerario-item animate-on-scroll" style="flex-direction: column;">
-                <div class="itinerario-icono"><img src="vestimenta.webp" alt="Icono de Vestimenta"></div>
-                <p class="texto"><strong>Formal</strong><br>El color <strong>rojo</strong> queda reservado exclusivamente para la quinceañera.</p>
-            </div>
-        </section>
-
-        <!-- MARK: GALERÍA DE FOTOS -->
-        <section>
-            <h2 class="animate-on-scroll">Mis Momentos</h2>
-            <!-- Bloque 1: 3 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-3-cols">
-                    <img src="fotos/1.jpeg" alt="Galeria 1">
-                    <img src="fotos/2.jpeg" alt="Galeria 2">
-                    <img src="fotos/3.jpeg" alt="Galeria 3">
-                    <img src="fotos/5.jpeg" alt="Galeria 5">
-                    <img src="fotos/6.jpeg" alt="Galeria 6">
-                    <img src="fotos/7.jpeg" alt="Galeria 7">
-                </div>
-            </div>
-            <!-- Bloque 2: 2 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-2-cols">
-                    <img src="fotos/8.jpeg" alt="Galeria 8">
-                    <img src="fotos/9.jpeg" alt="Galeria 9">
-                    <img src="fotos/10.jpeg" alt="Galeria 10">
-                    <img src="fotos/11.jpeg" alt="Galeria 11">
-                </div>
-            </div>
-            <!-- Bloque 3: 3 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-3-cols">
-                    <img src="fotos/12.jpeg" alt="Galeria 12">
-                    <img src="fotos/13.jpeg" alt="Galeria 13">
-                    <img src="fotos/14.jpeg" alt="Galeria 14">
-                    <img src="fotos/15.jpeg" alt="Galeria 15">
-                    <img src="fotos/16.jpeg" alt="Galeria 16">
-                    <img src="fotos/17.jpeg" alt="Galeria 17">
-                </div>
-            </div>
-            <!-- Bloque 4: 2 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-2-cols">
-                    <img src="fotos/18.jpeg" alt="Galeria 18">
-                    <img src="fotos/20.jpeg" alt="Galeria 20">
-                    <img src="fotos/21.jpeg" alt="Galeria 21">
-                    <img src="fotos/22.jpeg" alt="Galeria 22">
-                </div>
-            </div>
-            <!-- Bloque 5: 3 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-3-cols">
-                    <img src="fotos/23.jpeg" alt="Galeria 23">
-                    <img src="fotos/24.jpeg" alt="Galeria 24">
-                    <img src="fotos/25.jpeg" alt="Galeria 25">
-                    <img src="fotos/26.jpeg" alt="Galeria 26">
-                    <img src="fotos/28.jpeg" alt="Galeria 28">
-                    <img src="fotos/29.jpeg" alt="Galeria 29">
-                </div>
-            </div>
-            <!-- Bloque 6: 2 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-2-cols">
-                    <img src="fotos/30.jpeg" alt="Galeria 30">
-                    <img src="fotos/31.jpeg" alt="Galeria 31">
-                    <img src="fotos/32.jpeg" alt="Galeria 32">
-                    <img src="fotos/33.jpeg" alt="Galeria 33">
-                </div>
-            </div>
-            <!-- Bloque 7: 3 columnas -->
-            <div class="gallery-wrapper animate-on-scroll">
-                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
-                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
-                <div class="grid-gallery grid-3-cols">
-                    <img src="fotos/34.jpeg" alt="Galeria 34">
-                    <img src="fotos/36.jpeg" alt="Galeria 36">
-                    <img src="fotos/37.jpeg" alt="Galeria 37">
-                    <img src="fotos/38.jpeg" alt="Galeria 38">
-                    <img src="fotos/39.jpeg" alt="Galeria 39">
-                    <img src="fotos/40.jpeg" alt="Galeria 40">
-                </div>
-            </div>
-        </section>
-
-        <!-- MARK: LLUVIA DE SOBRES Y BUZÓN -->
-        <section class="animate-on-scroll">
-            <h2>Regalos</h2>
-            <p style="font-size: 3rem; margin: 0;">🎁</p>
-            <p class="texto">El mejor regalo es tu presencia, pero si deseas obsequiarme algo, puedes hacerlo en la</p>
-            <h3 style="font-family: var(--fuente-nombres); letter-spacing: 1px;">Lluvia de Sobres</h3>
-            <p class="texto">Es la tradición de regalar dinero en efectivo dentro de un sobre.</p>
-
-            <h2 style="margin-top: 40px;">Buzón de Deseos</h2>
-            <p class="texto">Si quieres dejarme un lindo mensaje por mis XV, puedes hacerlo aquí:</p>
-            <textarea id="mensajeInput" placeholder="Escribe tu mensaje aquí..."></textarea>
-            <!-- REEMPLAZA ESTOS NÚMEROS (LADA y NÚMERO) POR TU NÚMERO DE WHATSAPP -->
-            <button class="button" onclick="enviarMensajeWApp('52', '1234567890')">Enviar por WhatsApp</button>
-        </section>
-
-        <!-- MARK: GOOGLE FOTOS -->
-        <section class="animate-on-scroll">
-            <h2>Comparte tus Momentos</h2>
-            <p style="font-size: 3rem; margin: 0;">📸</p>
-            <p class="texto">Sube tus fotos y comparte tus mejores recuerdos de este momento único. ¡Estamos emocionados de ver tus fotos!</p>
-            <img src="https://placehold.co/200x200/ffffff/333333?text=QR+para+Fotos" alt="Código QR para Google Fotos" style="border-radius: 8px; margin-top: 15px;">
-            <a href="#" target="_blank" class="button">Ver Fotos</a>
-        </section>
-
-        <!-- MARK: FOOTER -->
-        <section style="border: none; padding-bottom: 20px;" class="animate-on-scroll">
-            <p class="texto" style="font-size: 1rem; color: #aaa;">Invitación creada por Vienna Fotografia y Video</p>
-        </section>
-    </div>
     </div> <!-- Cierre de background-container -->
 
     <!-- MARK: REPRODUCTOR DE MÚSICA FLOTANTE -->
@@ -744,7 +863,10 @@
 
                 // Observar todos los elementos que deben animarse
                 const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-                elementsToAnimate.forEach(el => observer.observe(el));
+                const elementsToAnimateSides = document.querySelectorAll('.animate-slide-in-left, .animate-slide-in-right');
+                
+                elementsToAnimate.forEach(el => observer.observe(el)); // Observa elementos con animación de subida
+                elementsToAnimateSides.forEach(el => observer.observe(el)); // Observa las flores con animación lateral
             }, 1800); // Sincronizado con la duración de la animación de las cubiertas
         });
 
