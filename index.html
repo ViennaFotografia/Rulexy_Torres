@@ -55,9 +55,40 @@
             position: relative;
         }
 
+        /* Decoración de flores en las esquinas y lados */
+        .corner-flower {
+            position: absolute;
+            width: 90px; /* Tamaño de la flor */
+            height: auto;
+            z-index: 10; /* Para que esté por encima de otros elementos */
+            pointer-events: none; /* Para que no interfiera con clics */
+        }
+        .top-left { top: -25px; left: -25px; }
+        .top-right {
+            top: -25px;
+            right: -25px;
+            transform: scaleX(-1); /* Voltear horizontalmente */
+        }
+        .bottom-left {
+            bottom: -25px;
+            left: -25px;
+            transform: scaleY(-1); /* Voltear verticalmente */
+        }
+        .bottom-right {
+            bottom: -25px;
+            right: -25px;
+            transform: scaleX(-1) scaleY(-1); /* Voltear en ambos ejes */
+        }
+        .side-flower-container {
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 20px; 
+            margin-top: -20px;
+        }
+
         /* Secciones */
         section {
-            padding: 40px 20px;
+            padding: 25px 20px; /* Espacio reducido entre secciones */
             position: relative;
             background-color: transparent; /* Asegura que las secciones no tapen el fondo del contenedor */
         }
@@ -177,11 +208,16 @@
         .segment .number { font-size: 1.8rem; font-weight: bold; font-family: var(--fuente-nombres); }
         .segment .unit { font-size: 0.9rem; text-transform: uppercase; margin-top: 5px; }
 
+        /* Contenedor para la galería y las cintas */
+        .gallery-wrapper {
+            position: relative;
+            margin-top: 20px;
+        }
+
         /* Cuadrícula de fotos */
         .grid-gallery {
             display: grid;
             gap: 10px;
-            margin-top: 20px;
         }
         .grid-3-cols {
             grid-template-columns: repeat(3, 1fr);
@@ -196,6 +232,23 @@
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid #eee;
+        }
+
+        /* Cintas decorativas para la galería */
+        .gallery-corner {
+            position: absolute;
+            width: 60px; /* Ajusta el tamaño según necesites */
+            height: auto;
+            z-index: 5; /* Por debajo de las flores principales pero encima de la galería */
+            pointer-events: none; /* Para que no interfiera con clics */
+        }
+        .gallery-top-left {
+            top: -20px;
+            left: -20px;
+        }
+        .gallery-top-right {
+            top: -20px;
+            right: -20px;
         }
 
         /* Formularios y Cajas de texto */
@@ -377,6 +430,12 @@
     <!-- Nuevo contenedor para el fondo -->
     <div class="background-container">
     <div class="container">
+        <!-- Flores decorativas de las esquinas -->
+        <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-left">
+        <img src="flor2.webp" alt="Decoración floral" class="corner-flower top-right">
+        <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-left">
+        <img src="flor2.webp" alt="Decoración floral" class="corner-flower bottom-right">
+
         
         <!-- MARK: INICIO / PORTADA -->
         <section id="portada">
@@ -418,6 +477,12 @@
             <p class="texto nombres-familiares animate-on-scroll">Nancy Fernandez<br>&<br>Rafael Ruiz</p>
         </section>
 
+        <!-- Flores decorativas laterales -->
+        <div class="side-flower-container">
+            <img src="flor2.webp" alt="Decoración floral" class="animate-on-scroll" style="width: 70px; transform: scaleX(-1);">
+            <img src="flor2.webp" alt="Decoración floral" class="animate-on-scroll" style="width: 70px;">
+        </div>
+
         <!-- MARK: UBICACIONES -->
         <section>
             <h2 class="animate-on-scroll">Lugar del Evento</h2>
@@ -453,94 +518,89 @@
         <section>
             <h2 class="animate-on-scroll">Mis Momentos</h2>
             <!-- Bloque 1: 3 columnas -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/1.jpeg" alt="Galeria 1">
-                <img src="fotos/2.jpeg" alt="Galeria 2">
-                <img src="fotos/9.jpeg" alt="Galeria 9">
-                <img src="fotos/5.jpeg" alt="Galeria 5">
-                <img src="fotos/6.jpeg" alt="Galeria 6">
-                <img src="fotos/7.jpeg" alt="Galeria 7">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-3-cols">
+                    <img src="fotos/1.jpeg" alt="Galeria 1">
+                    <img src="fotos/2.jpeg" alt="Galeria 2">
+                    <img src="fotos/3.jpeg" alt="Galeria 3">
+                    <img src="fotos/5.jpeg" alt="Galeria 5">
+                    <img src="fotos/6.jpeg" alt="Galeria 6">
+                    <img src="fotos/7.jpeg" alt="Galeria 7">
+                </div>
             </div>
             <!-- Bloque 2: 2 columnas -->
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/8.jpeg" alt="Galeria 8">
-                <img src="fotos/3.jpeg" alt="Galeria 3">
-                <img src="fotos/10.jpeg" alt="Galeria 10">
-                <img src="fotos/11.jpeg" alt="Galeria 11">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-2-cols">
+                    <img src="fotos/8.jpeg" alt="Galeria 8">
+                    <img src="fotos/9.jpeg" alt="Galeria 9">
+                    <img src="fotos/10.jpeg" alt="Galeria 10">
+                    <img src="fotos/11.jpeg" alt="Galeria 11">
+                </div>
             </div>
             <!-- Bloque 3: 3 columnas -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/12.jpeg" alt="Galeria 12">
-                <img src="fotos/13.jpeg" alt="Galeria 13">
-                <img src="fotos/14.jpeg" alt="Galeria 14">
-                <img src="fotos/15.jpeg" alt="Galeria 15">
-                <img src="fotos/16.jpeg" alt="Galeria 16">
-                <img src="fotos/17.jpeg" alt="Galeria 17">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-3-cols">
+                    <img src="fotos/12.jpeg" alt="Galeria 12">
+                    <img src="fotos/13.jpeg" alt="Galeria 13">
+                    <img src="fotos/14.jpeg" alt="Galeria 14">
+                    <img src="fotos/15.jpeg" alt="Galeria 15">
+                    <img src="fotos/16.jpeg" alt="Galeria 16">
+                    <img src="fotos/17.jpeg" alt="Galeria 17">
+                </div>
             </div>
             <!-- Bloque 4: 2 columnas -->
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/18.jpeg" alt="Galeria 18">
-                <img src="fotos/20.jpeg" alt="Galeria 20">
-                <img src="fotos/21.jpeg" alt="Galeria 21">
-                <img src="fotos/22.jpeg" alt="Galeria 22">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-2-cols">
+                    <img src="fotos/18.jpeg" alt="Galeria 18">
+                    <img src="fotos/20.jpeg" alt="Galeria 20">
+                    <img src="fotos/21.jpeg" alt="Galeria 21">
+                    <img src="fotos/22.jpeg" alt="Galeria 22">
+                </div>
             </div>
             <!-- Bloque 5: 3 columnas -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/23.jpeg" alt="Galeria 23">
-                <img src="fotos/24.jpeg" alt="Galeria 24">
-                <img src="fotos/25.jpeg" alt="Galeria 25">
-                <img src="fotos/26.jpeg" alt="Galeria 26">
-                <img src="fotos/28.jpeg" alt="Galeria 28">
-                <img src="fotos/29.jpeg" alt="Galeria 29">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-3-cols">
+                    <img src="fotos/23.jpeg" alt="Galeria 23">
+                    <img src="fotos/24.jpeg" alt="Galeria 24">
+                    <img src="fotos/25.jpeg" alt="Galeria 25">
+                    <img src="fotos/26.jpeg" alt="Galeria 26">
+                    <img src="fotos/28.jpeg" alt="Galeria 28">
+                    <img src="fotos/29.jpeg" alt="Galeria 29">
+                </div>
             </div>
             <!-- Bloque 6: 2 columnas -->
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/30.jpeg" alt="Galeria 30">
-                <img src="fotos/31.jpeg" alt="Galeria 31">
-                <img src="fotos/32.jpeg" alt="Galeria 32">
-                <img src="fotos/33.jpeg" alt="Galeria 33">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-2-cols">
+                    <img src="fotos/30.jpeg" alt="Galeria 30">
+                    <img src="fotos/31.jpeg" alt="Galeria 31">
+                    <img src="fotos/32.jpeg" alt="Galeria 32">
+                    <img src="fotos/33.jpeg" alt="Galeria 33">
+                </div>
             </div>
             <!-- Bloque 7: 3 columnas -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/34.jpeg" alt="Galeria 34">
-                <img src="fotos/36.jpeg" alt="Galeria 36">
-                <img src="fotos/37.jpeg" alt="Galeria 37">
-                <img src="fotos/38.jpeg" alt="Galeria 38">
-                <img src="fotos/39.jpeg" alt="Galeria 39">
-                <img src="fotos/40.jpeg" alt="Galeria 40">
-            </div>
-            <!-- Bloque 8: 2 columnas -->
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/41.jpeg" alt="Galeria 41">
-                <img src="fotos/42.jpeg" alt="Galeria 42">
-                <img src="fotos/44.jpeg" alt="Galeria 44">
-                <img src="fotos/45.jpeg" alt="Galeria 45">
-            </div>
-            <!-- Bloque 9: 3 columnas -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/46.jpeg" alt="Galeria 46">
-                <img src="fotos/47.jpeg" alt="Galeria 47">
-                <img src="fotos/48.jpeg" alt="Galeria 48">
-                <img src="fotos/49.jpeg" alt="Galeria 49">
-                <img src="fotos/50.jpeg" alt="Galeria 50">
-                <img src="fotos/52.jpeg" alt="Galeria 52">
-            </div>
-            <!-- Bloque 10: 2 columnas -->
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/53.jpeg" alt="Galeria 53">
-                <img src="fotos/54.jpeg" alt="Galeria 54">
-                <img src="fotos/55.jpeg" alt="Galeria 55">
-                <img src="fotos/56.jpeg" alt="Galeria 56">
-            </div>
-            <!-- Bloque 11: 3 columnas (final) -->
-            <div class="grid-gallery grid-3-cols animate-on-scroll">
-                <img src="fotos/57.jpeg" alt="Galeria 57">
-                <img src="fotos/58.jpeg" alt="Galeria 58">
-                <img src="fotos/59.jpeg" alt="Galeria 59">
-            </div>
-            <div class="grid-gallery grid-2-cols animate-on-scroll">
-                <img src="fotos/60.jpeg" alt="Galeria 60">
-                <img src="fotos/61.jpeg" alt="Galeria 61">
+            <div class="gallery-wrapper animate-on-scroll">
+                <img src="v3.webp" alt="Decoración" class="gallery-corner gallery-top-left">
+                <img src="v4.webp" alt="Decoración" class="gallery-corner gallery-top-right">
+                <div class="grid-gallery grid-3-cols">
+                    <img src="fotos/34.jpeg" alt="Galeria 34">
+                    <img src="fotos/36.jpeg" alt="Galeria 36">
+                    <img src="fotos/37.jpeg" alt="Galeria 37">
+                    <img src="fotos/38.jpeg" alt="Galeria 38">
+                    <img src="fotos/39.jpeg" alt="Galeria 39">
+                    <img src="fotos/40.jpeg" alt="Galeria 40">
+                </div>
             </div>
         </section>
 
