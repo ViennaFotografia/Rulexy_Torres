@@ -39,10 +39,10 @@
         /* Nuevo contenedor para la imagen de fondo */
         .background-container {
             background-image: url('fondo.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-size: 100% auto; /* Ajusta al ancho y permite repetir */
+            background-position: top center; /* Empieza desde arriba */
             padding: 20px; /* Este es el espacio que crea el efecto de marco */
+            background-repeat: repeat-y; /* Repite verticalmente para un scroll "infinito" */
         }
 
         /* Contenedor principal (estilo móvil) */
@@ -628,30 +628,9 @@
             <a href="#" target="_blank" class="button">Ver Fotos</a>
         </section>
 
-        <!-- MARK: CONFIRMACIÓN DE ASISTENCIA -->
-        <section class="animate-on-scroll">
-            <h2>Confirmar Asistencia</h2>
-            <form onsubmit="return confirmarAsistencia(event)">
-                <label for="familia" class="texto">Nombre y Apellido:</label><br>
-                <input type="text" id="familia" maxlength="30" required>
-                
-                <div style="margin: 20px 0; text-align: left; display: inline-block;">
-                    <label class="texto" style="display: block; margin-bottom: 10px;">Confirmo que:</label>
-                    <input type="radio" id="asistire" name="confirmacion" value="asistire" checked>
-                    <label for="asistire">Asistiré</label><br><br>
-                    
-                    <input type="radio" id="noAsistire" name="confirmacion" value="noAsistire">
-                    <label for="noAsistire">No Asistiré</label>
-                </div>
-                
-                <br>
-                <button type="submit" class="button">Confirmar por WhatsApp</button>
-            </form>
-        </section>
-
         <!-- MARK: FOOTER -->
         <section style="border: none; padding-bottom: 20px;" class="animate-on-scroll">
-            <p class="texto" style="font-size: 1rem; color: #aaa;">Invitación creada por Ruxely Torres</p>
+            <p class="texto" style="font-size: 1rem; color: #aaa;">Invitación creada por Vienna Fotografia y Video</p>
         </section>
     </div>
     </div> <!-- Cierre de background-container -->
@@ -701,28 +680,6 @@
             if(!mensaje) return alert("Por favor escribe un mensaje primero.");
             var url = "https://api.whatsapp.com/send?phone=" + lada + numero + "&text=" + encodeURIComponent(mensaje);
             window.open(url, '_blank');
-        }
-
-        // 3. Lógica de Confirmación de Asistencia
-        // REEMPLAZA '1234567890' CON TU NÚMERO REAL DE WHATSAPP
-        const numeroConfirmacion = "1234567890"; 
-        
-        function confirmarAsistencia(event) {
-            event.preventDefault();
-            var nombre = document.getElementById("familia").value;
-            var asistire = document.getElementById("asistire").checked;
-            
-            var mensajeCA = asistire 
-                ? `Hola, soy ${nombre} y confirmo mi asistencia a los XV años de Ruxely.` 
-                : `Hola, soy ${nombre} y lamentablemente, no podré asistir a los XV años de Ruxely.`;
-
-            var confirmacion = confirm(asistire ? "¿Estás seguro de confirmar tu asistencia?" : "¿Estás seguro de que no podrás asistir?");
-            
-            if (confirmacion) {
-                var urlCA = "https://api.whatsapp.com/send?phone=52" + numeroConfirmacion + "&text=" + encodeURIComponent(mensajeCA);
-                window.open(urlCA, '_blank').focus();
-            }
-            return false;
         }
 
         // 4. Lógica de Reproductor de Audio
@@ -788,7 +745,22 @@
                 // Observar todos los elementos que deben animarse
                 const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
                 elementsToAnimate.forEach(el => observer.observe(el));
-            }, 1800);
+            }, 1800); // Sincronizado con la duración de la animación de las cubiertas
+        });
+
+        // 5. Lógica para pausar la música si la pestaña no está visible
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Si la música estaba sonando, la pausamos temporalmente
+                if (estaReproduciendo) {
+                    reproductor.pause();
+                }
+            } else {
+                // Si la música debería estar sonando, la reanudamos
+                if (estaReproduciendo) {
+                    reproductor.play();
+                }
+            }
         });
     </script>
 </body>
