@@ -317,43 +317,52 @@
         }
 
         /* --- Estilos para la Cubierta de la Invitación --- */
-        .cover-panel {
+        #cover-container {
             position: fixed;
             top: 0;
-            width: 50vw; /* 50% del ancho de la ventana */
-            height: 100vh; /* 100% de la altura de la ventana */
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            z-index: 9999;
+            display: flex; /* Usamos Flexbox para centrar el botón */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-panel {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 50vh; /* 50% de la altura de la ventana */
             background-color: #D1C1AB;
             z-index: 9998;
             box-sizing: border-box; /* Para que el borde no afecte el tamaño total */
             transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1); /* Ajustado a 1.8s para sincronizar */
         }
 
-        #cover-left {
-            left: 0;
-            border-right: 2px solid var(--color-rojo-pastel);
+        #cover-top {
+            top: 0;
+            border-bottom: 2px solid var(--color-rojo-pastel);
         }
 
-        #cover-right {
-            right: 0;
-            border-left: 2px solid var(--color-rojo-pastel);
+        #cover-bottom {
+            bottom: 0;
+            border-top: 2px solid var(--color-rojo-pastel);
         }
 
         /* Clases para animar la apertura */
-        #cover-left.opened {
-            transform: translateX(-100%);
+        #cover-top.opened {
+            transform: translateY(-100%);
         }
-        #cover-right.opened {
-            transform: translateX(100%);
+        #cover-bottom.opened {
+            transform: translateY(100%);
         }
 
         #play-button-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000; /* Por encima de los paneles */
+            position: relative; /* Necesario para que z-index funcione */
+            /* El centrado ahora lo maneja #cover-container */
+            z-index: 10000; /* Asegura que el botón esté sobre los paneles */
             transition: opacity 0.5s ease;
-            display: flex;
         }
 
         .play-button {
@@ -419,11 +428,13 @@
 <body>
 
     <!-- MARK: CUBIERTA INICIAL -->
-    <div id="cover-left" class="cover-panel"></div>
-    <div id="cover-right" class="cover-panel"></div>
-    <div id="play-button-container">
-        <div class="play-button" id="cover-play-button">
-            <div class="play-icon"></div>
+    <div id="cover-container">
+        <div id="cover-top" class="cover-panel"></div>
+        <div id="cover-bottom" class="cover-panel"></div>
+        <div id="play-button-container">
+            <div class="play-button" id="cover-play-button">
+                <div class="play-icon"></div>
+            </div>
         </div>
     </div>
 
@@ -488,7 +499,7 @@
             <h2 class="animate-on-scroll">Lugar del Evento</h2>
 
             <!-- Recepción -->
-            <a href="https://maps.app.goo.gl/GHcz6Ez6325gRL7K9" target="_blank" class="lugar-link animate-on-scroll">
+            <a href="https://www.google.com/maps/place/32.49456478326591,-116.96850702640816" target="_blank" class="lugar-link animate-on-scroll">
                 <img src="foto_local.jpg" alt="Foto del Salon Gastronomico">
                 <h4 class="nombre-lugar">Salon Gastronomico</h4>
                 <p class="direccion-lugar">Blvd. Gustavo Diaz Ordaz 15, El Prado, 22105 Tijuana, B.C.</p>
@@ -699,8 +710,9 @@
         }
         
         // Iniciar audio con la primera interacción del usuario
-        const coverLeft = document.getElementById('cover-left');
-        const coverRight = document.getElementById('cover-right');
+        const coverContainer = document.getElementById('cover-container');
+        const coverTop = document.getElementById('cover-top');
+        const coverBottom = document.getElementById('cover-bottom');
         const coverPlayButton = document.getElementById('cover-play-button');
         const playButtonContainer = document.getElementById('play-button-container');
 
@@ -715,8 +727,8 @@
             playButtonContainer.style.opacity = '0';
 
             // 2. Iniciar la animación de apertura de las cubiertas INMEDIATAMENTE
-            coverLeft.classList.add('opened');
-            coverRight.classList.add('opened');
+            coverTop.classList.add('opened');
+            coverBottom.classList.add('opened');
 
             // 3. Iniciar la música
             if (reproductor.paused) {
@@ -726,9 +738,7 @@
             // 4. Limpiar todo y activar animaciones después de la apertura
             setTimeout(() => {
                 document.body.style.overflow = 'auto';
-                coverLeft.style.display = 'none';
-                coverRight.style.display = 'none';
-                playButtonContainer.style.display = 'none';
+                coverContainer.style.display = 'none'; // Ocultamos el contenedor principal
 
                 // 5. Lógica de Animación al Hacer Scroll (INICIA AHORA)
                 const observer = new IntersectionObserver((entries) => {
